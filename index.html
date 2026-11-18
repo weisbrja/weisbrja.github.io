@@ -460,7 +460,7 @@
         );
       }
 
-      function print(lines) {
+      function output(lines) {
         for (const l of lines) {
           const div = el("div", "line");
           div.append(...[].concat(l));
@@ -493,9 +493,9 @@
         const [name, ...args] = line.trim().split(/\s+/);
         if (Object.hasOwn(commands, name)) {
           status = 0;
-          print(commands[name][1](args));
+          output(commands[name][1](args));
         } else if (name) {
-          print([`zsh: command not found: ${name}`]);
+          output([`zsh: command not found: ${name}`]);
           status = 127;
         }
         set("");
@@ -536,7 +536,7 @@
         if (prefix !== word) return set(head + prefix);
 
         echo(input.value);
-        print([matches.map((m) => m.replace(/.*\/(?=.)/, "")).join("  ")]);
+        output([matches.map((m) => m.replace(/.*\/(?=.)/, "")).join("  ")]);
         scroll();
       }
 
@@ -615,7 +615,7 @@
           input.focus({ preventScroll: true });
       });
 
-      print([el("span", "gray", "type 'help' to see available commands")]);
+      output([el("span", "gray", "type 'help' to see available commands")]);
       run("whoami");
       input.focus({ preventScroll: true });
     </script>
